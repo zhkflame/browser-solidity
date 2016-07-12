@@ -131,7 +131,12 @@ function Compiler (editor, renderer, queryParams, handleGithubCall, outputField,
   }
 
   this.loadVersion = function (usingWorker, version, setVersionText) {
-    var url = 'https://ethereum.github.io/solc-bin/bin/' + version;
+    var url;
+    if (version !== 'soljson.js') {
+      url = 'https://ethereum.github.io/solc-bin/bin/' + version;
+    } else {
+      url = 'soljson.js';
+    }
 
     if (usingWorker) {
       loadWorker(url, setVersionText);
